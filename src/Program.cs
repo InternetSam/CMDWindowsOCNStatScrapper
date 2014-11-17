@@ -61,14 +61,7 @@ namespace OCStatScrapper
             String gm = Console.ReadLine();
             gm = gm.ToLower().Trim();
 
-            //Copy to clipboard?
-            Console.Clear();
-            Console.Write("Would you like to copy the url of the page we locate you on to your clipboard?\nyes/no: ");
-            String toCopy = Console.ReadLine();
-            toCopy = toCopy.ToLower().Trim();
-
             //Start the switch statements
-
             String statType = null;
             //Find out what the leaderboard input is
 
@@ -174,28 +167,6 @@ namespace OCStatScrapper
                     break;
             }
 
-            //Copy to clipboard?
-            bool yesNo = false;
-
-            switch (toCopy)
-            {
-                case "yes":
-                    yesNo = true;
-                    break;
-
-                case "no":
-                    yesNo = false;
-                    break;
-
-                default:
-                    Console.Clear();
-                    Console.Write("You provided and invalid arguement (4)");
-                    Console.ReadLine();
-                    Environment.Exit(1);
-                    break;
-
-            }
-
             Console.WriteLine("\n");
             String scanningUrl = "https://oc.tc/stats?game=" + gamemode + "&page=";
             String secondScanningUrl = "&sort="+ statType +"&time=" + timeFrameInput;
@@ -203,12 +174,12 @@ namespace OCStatScrapper
             Console.ReadLine();
             Console.Clear();
 
-            scrape(user,scanningUrl, secondScanningUrl, yesNo);
+            scrape(user,scanningUrl, secondScanningUrl);
         }
         
 
         //Scrapping code
-        public static void scrape(String searchName, String firstUrl, String secondUrl, bool copyFinalUrl) 
+        public static void scrape(String searchName, String firstUrl, String secondUrl) 
         {
             int page = 1;
             int userNum = 1;
@@ -227,6 +198,7 @@ namespace OCStatScrapper
                     if (curName == searchName)
                     {
                         Console.WriteLine("You are currently number " + userNum + "\nin the field you entered!\nPlease visit\n" + url + "\nto learn more!");
+                       
                         Console.ReadLine();
                         Console.WriteLine("Warning if you press enter again the program will be closed!");
                         Console.ReadLine();
